@@ -95,6 +95,8 @@ def responder(mensagem):
     O que você deseja?
     /store Informação de uma loja específica
     /all_stores Informação de todas as lojas
+
+ Obs: A primeira informação sobre a loja vai demorar alguns minutos (o serviço está hospedado gratuitamente), e nesse caso pode ser necessário enviar uma nova mensagem.
 """
     bot.reply_to(mensagem, texto)
     record_user(mensagem.chat.id)
