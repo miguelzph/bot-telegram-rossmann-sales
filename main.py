@@ -84,6 +84,19 @@ def all_store_sales(mensagem):
         bot.send_document(mensagem.chat.id, doc)
 
 
+# START
+@bot.message_handler(commands=["start"])
+def initial_contact(mensagem):
+    texto = """
+Bem vindo! Bot para obter a previsão de vendas da rede de farmácias Rossmann (6 semanas).
+
+Obs: A primeira informação sobre a loja vai demorar alguns minutos (o serviço está hospedado gratuitamente), e nesse caso pode ser necessário enviar uma nova mensagem."""
+
+    bot.send_message(mensagem.chat.id, texto)
+
+    responder(mensagem)
+
+
 # STANDART
 def verify(mensagem):
     return True
@@ -91,15 +104,12 @@ def verify(mensagem):
 
 @bot.message_handler(func=verify)
 def responder(mensagem):
+    record_user(mensagem.chat.id)
     texto = """
     O que você deseja?
-    /store Informação de uma loja específica
-    /all_stores Informação de todas as lojas
-
- Obs: A primeira informação sobre a loja vai demorar alguns minutos (o serviço está hospedado gratuitamente), e nesse caso pode ser necessário enviar uma nova mensagem.
-"""
+    /store Previsão de uma loja específica
+    /all_stores Previsão de todas as lojas"""
     bot.reply_to(mensagem, texto)
-    record_user(mensagem.chat.id)
 
 
 bot.polling()
